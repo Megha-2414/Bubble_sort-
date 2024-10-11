@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort Webpage</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Bubble Sort Visualizer</h1>
+        <nav>
+            <ul>
+                <li><a href="#sort-section">Bubble Sort</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Welcome to the Bubble Sort Visualizer</h2>
+        <p>Enter an array of numbers to see how the Bubble Sort algorithm works!</p>
+    </section>
+
+    <section id="sort-section">
+        <h2>Bubble Sort Algorithm</h2>
+        <p>Enter a comma-separated list of numbers to be sorted:</p>
+
+        <input id="arrayInput" type="text" placeholder="e.g. 5, 2, 9, 1, 5, 6">
+        <button id="bubbleSortBtn">Sort Array</button>
+
+        <p>Sorted array: <span id="sortedArray"></span></p>
+    </section>
+
+    <section id="about">
+        <h2>About Bubble Sort</h2>
+        <p>Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Bubble Sort Webpage</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Bubble Sort Algorithm
+        function bubbleSort(arr) {
+            let len = arr.length;
+            for (let i = 0; i < len; i++) {
+                for (let j = 0; j < len - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        // Swap the elements
+                        let temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
+        // Event listener for button click
+        document.getElementById("bubbleSortBtn").addEventListener("click", function() {
+            // Get input array
+            let input = document.getElementById("arrayInput").value;
+            let array = input.split(',').map(Number); // Convert input string to an array of numbers
+
+            // Check if array is valid
+            if (array.some(isNaN)) {
+                alert("Please enter a valid comma-separated list of numbers.");
+                return;
+            }
+
+            // Sort the array using bubble sort
+            let sortedArray = bubbleSort(array);
+
+            // Display sorted array
+            document.getElementById("sortedArray").innerText = sortedArray.join(", ");
+        });
+    </script>
+</body>
+</html>
